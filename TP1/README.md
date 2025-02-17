@@ -17,4 +17,3 @@ Este programa implementa um servidor HTTP que serve duas páginas principais:
 
 - [`ex1.js`](ex1.js): Implementação do servidor HTTP e das funções para gerar as páginas HTML.
 - [`dataset_reparacoes.json`](dataset_reparacoes.json): Dataset de reparações (não utilizado diretamente pelo servidor).
-
