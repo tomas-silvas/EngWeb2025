@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    .w3-card-4
+    .header.w3-container.w3-purple
+        h2 Edit form
+
+    form.w3-container(method="POST")
+        fieldset
+            legend Metadata
+            label Ano
+            input.w3-input.w3-round(type="text" name="year" readonly value=f.year)
+            label Titulo
+            input.w3-input.w3-round(type="text" name="title" value=f.title)
+            label Elenco
+            input.w3-input.w3-round(type="text" name="cast" value=f.cast)
+            label Géneros
+            input.w3-input.w3-round(type="text" name="genre" value=f.genres)
+
+        br
+        button.w3-btn.w3-purple.w3-mb-2(type="submit") Editar
