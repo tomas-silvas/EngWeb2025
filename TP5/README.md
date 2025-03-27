@@ -2,6 +2,8 @@
 
 ### Data: 27/03/2025  
 ### Autor: Tomás Silva A104362  
+### Foto:
+![Photo](../Photo.png)
 
 ---
 
