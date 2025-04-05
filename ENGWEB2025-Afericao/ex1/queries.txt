@@ -1,0 +1,177 @@
+1: db.livros.countDocuments({
+    title: { $regex: /Love/i }
+});
+
+resposta: 366
+
+2: db.livros.find(
+    { author: { $regex: /Austen/i } },
+    { title: 1, _id: 0 }
+).sort({ title: 1 });
+
+resposta: 
+{ title: 'Emma' },
+  { title: 'Mansfield Park' },
+  { title: 'Northanger Abbey' },
+  { title: 'Persuasion' },
+  { title: 'Pride and Prejudice' },
+  { title: 'Pride and Prejudice and Zombies' },
+  { title: 'Pride and Prejudice and Zombies: The Graphic Novel' },
+  { title: 'Sense and Sensibility' },
+  { title: 'The Complete Novels' }
+
+3: db.livros.distinct("author").sort();
+
+resposta: 
+'#1-3)',
+  '#4-5)',
+  '(Goodreads Author)',
+  ')',
+  '50 Cent',
+  "A'Mera Frieman",
+  'A. Elizabeth Delany',
+  'A. Kirk (Goodreads Author)',
+  'A. Lee Martinez (Goodreads Author)',
+  'A. Meredith Walters (Goodreads Author)',
+  'A. Merritt',
+  'A. Poulin Jr. (Translator)',
+  'A. Roger Merrill',
+  'A. Rose (Goodreads Author)',
+  'A. Vivanti Salmon (Translator)',
+  'A.A. Attanasio (Goodreads Author)',
+  'A.A. Milne',
+  'A.C. Bextor (Goodreads Author)',
+  'A.C. Crispin',
+  'A.C. Gaughen (Goodreads Author)',
+  'A.C. Weisbecker',
+  'A.D. Bloom',
+  'A.D. Zoltan',
+  'A.F. Knott (Goodreads Author)',
+  'A.G. Howard (Goodreads Author)',
+  'A.G. Riddle (Goodreads Author)',
+  'A.H. Holt',
+  'A.H.T. Levi (Introduction)',
+  'A.I. Alexen',
+  'A.J. Betts (Goodreads Author)',
+  'A.J. Bialo',
+  'A.J. Cronin',
+  'A.J. Finn',
+  'A.J. Jacobs',
+  'A.J. Krailsheimer (Translator)',
+  'A.J. Mouse (Goodreads Author)',
+  'A.J.P. Taylor',
+  'A.L. Gibson',
+  'A.L. Jackson (Goodreads Author)',
+  'A.M. Hargrove (Goodreads Author)',
+  'A.M. Homes',
+  'A.M. Madden (Goodreads Author)',
+  'A.M. Robinson (Goodreads Author)',
+  'A.M. Willard',
+  'A.N. Roquelaure',
+  'A.N. Roquelaure (Pseudonym)',
+  'A.N. Roquelaure (pseudonym)',
+  'A.P. Stephens (Goodreads Author)',
+  'A.P.J. Abdul Kalam',
+  'A.R. Torre',
+  'A.S. Byatt',
+  'A.S. Byatt (Editor/Introduction)',
+  'A.S. Byatt (Introduction)',
+  'A.S. King (Goodreads Author)',
+  'A.S.A. Harrison',
+  'A.T. Hatto (Translator)',
+  'A.V. Lebrón (translator)',
+  'A.V. Miller (Translator)',
+  'A.W. Tozer',
+  'A.Z. Manfred',
+  'Aadhavan',
+  'Aarno Peromies (Translator)',
+  'Aaron Asher (Translator)',
+  "Aaron D'Este (Goodreads Author)",
+  'Aaron Jennings (Goodreads Author)',
+  'Aaron Johnston (Goodreads Author)',
+  'Aaron Leichter (Adapter)',
+  'Aaron M. Patterson (Goodreads Author)',
+  'Aaron Parrett (Introduction)',
+  'Aaron Pocock (Illustrator)',
+  'Aaron Pogue (Goodreads Author)',
+  'Aaron Shaun Brennan',
+  'Aaron Sowd (Illustrator)',
+  'Aaron-Michael Hall (Goodreads Author)',
+  'AbCraden (Narrator)',
+  'AbJohnson',
+  'AbMcDonald (Goodreads Author)',
+  'Abbas Maroufi',
+  'Abbas Milani',
+  'Abbi Glines (Goodreads Author)',
+  'Abd al-Rahman al-Kawakibi',
+  "Abdul Mun'im Muhammad",
+  'Abdul Rahman Munif',
+  'Abdul-Jabbar Khan',
+  'Abdurrahman Wahid',
+  'Abeni Morris (Goodreads Author)',
+  'Abhishek Kapoor (Goodreads Author)',
+  'Abi Ketner (Goodreads Author)',
+  'Abigail Barnette',
+  'Abigail Gibbs (Goodreads Author)',
+  'Abigail Haas (Pseudonym)',
+  'Abigail Israel (Translator)',
+  'Abigail Reynolds (Goodreads Author)',
+  'Abigail Roux (Goodreads Author)',
+  'Abigail Stone',
+  'Abigail Thomas',
+  'Abolqasem Ferdowsi',
+  'Abra Ebner (Goodreads Author)',
+  'Abraham Joshua Heschel',
+  'Abraham Lincoln',
+  ... 13543 more items
+
+4: db.livros.aggregate([
+    { $unwind: "$genres" },
+    { $group: { _id: "$genres", count: { $sum: 1 } } },
+    { $sort: { count: -1 } }
+]);
+
+resposta: 
+{ _id: 'Fiction', count: 14461 },
+  { _id: 'Fantasy', count: 7189 },
+  { _id: 'Romance', count: 6746 },
+  { _id: 'Young Adult', count: 5875 },
+  { _id: 'Contemporary', count: 4709 },
+  { _id: 'Novels', count: 4181 },
+  { _id: 'Adult', count: 3927 },
+  { _id: 'Audiobook', count: 3721 },
+  { _id: 'Classics', count: 3707 },
+  { _id: 'Historical Fiction', count: 3511 },
+  { _id: 'Mystery', count: 3335 },
+  { _id: 'Adventure', count: 3280 },
+  { _id: 'Literature', count: 3149 },
+  { _id: 'Paranormal', count: 2816 },
+  { _id: 'Historical', count: 2764 },
+  { _id: 'Nonfiction', count: 2626 },
+  { _id: 'Science Fiction', count: 2440 },
+  { _id: 'Magic', count: 2156 },
+  { _id: 'Thriller', count: 2119 },
+  { _id: 'Childrens', count: 2088 }
+
+5: db.livros.find(
+    { characters: { $regex: /Sirius Black/i } },
+    { title: 1, isbn: 1, _id: 0 }
+).sort({ title: 1 });
+
+resposta:
+{
+    title: 'Harry Potter and the Deathly Hallows',
+    isbn: '9780545010221'
+  },
+  {
+    title: 'Harry Potter and the Goblet of Fire',
+    isbn: '9999999999999'
+  },
+  {
+    title: 'Harry Potter and the Order of the Phoenix',
+    isbn: '9780439358071'
+  },
+  {
+    title: 'Harry Potter and the Prisoner of Azkaban',
+    isbn: '9780439655484'
+  }

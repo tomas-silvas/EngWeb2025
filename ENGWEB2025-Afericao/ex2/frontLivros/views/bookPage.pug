@@ -1,0 +1,94 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1 
+                span Detalhes do Livro
+                a.w3-btn.w3-round.w3-grey(href="/") Voltar à Lista
+
+        .w3-container
+            if book
+                ul.w3-ul
+                    li
+                        strong ID: 
+                        span= book._id
+                    li
+                        strong Title: 
+                        span= book.title
+                    li
+                        strong Series: 
+                        span= book.series || "N/A"
+                    li
+                        strong Author(s): 
+                        span
+                            each author, index in book.author
+                                a(href="/entidades/" + encodeURIComponent(author))= author
+                                if index < book.author.length - 1
+                                    | , 
+                    li
+                        strong Rating: 
+                        span= book.rating
+                    li
+                        strong Description: 
+                        span= book.description
+                    li
+                        strong Language: 
+                        span= book.language
+                    li
+                        strong ISBN: 
+                        span= book.isbn
+                    li
+                        strong Genres: 
+                        span= book.genres.join(", ")
+                    li
+                        strong Characters: 
+                        span= book.characters.join(", ")
+                    li
+                        strong Format: 
+                        span= book.bookFormat
+                    li
+                        strong Edition: 
+                        span= book.edition
+                    li
+                        strong Pages: 
+                        span= book.pages
+                    li
+                        strong Publisher: 
+                        span= book.publisher
+                    li
+                        strong Publish Date: 
+                        span= book.publishDate
+                    li
+                        strong First Publish Date: 
+                        span= book.firstPublishDate
+                    li
+                        strong Awards: 
+                        span= book.awards.join(", ")
+                    li
+                        strong Number of Ratings: 
+                        span= book.numRatings
+                    li
+                        strong Ratings by Stars: 
+                        span= book.ratingsByStars.join(", ")
+                    li
+                        strong Liked Percent: 
+                        span= book.likedPercent + "%"
+                    li
+                        strong Setting: 
+                        span= book.setting.join(", ")
+                    li
+                        strong BBE Score: 
+                        span= book.bbeScore
+                    li
+                        strong BBE Votes: 
+                        span= book.bbeVotes
+                    li
+                        strong Price: 
+                        span= "$" + book.price
+                    if book.coverImg
+                        li
+                            strong Cover Image: 
+                            img.w3-image(src=book.coverImg, alt="Cover Image")
+            else
+                p Nenhuma informação encontrada para este livro.
