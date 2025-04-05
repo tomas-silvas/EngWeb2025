@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1 
+                span Detalhes do Contrato
+                a.w3-btn.w3-round.w3-grey(href="/front") Voltar à Lista
+
+        .w3-container
+            if contrato
+                ul.w3-ul
+                    li
+                        strong ID do Contrato: 
+                        span= contrato._id
+                    li
+                        strong Número do Anúncio: 
+                        span= contrato.nAnuncio
+                    li
+                        strong Tipo de Procedimento: 
+                        span= contrato.tipoprocedimento
+                    li
+                        strong Objeto do Contrato: 
+                        span= contrato.objectoContrato
+                    li
+                        strong Data de Publicação: 
+                        span= contrato.dataPublicacao
+                    li
+                        strong Data de Celebração do Contrato: 
+                        span= contrato.dataCelebracaoContrato
+                    li
+                        strong Preço Contratual: 
+                        span= contrato.precoContratual
+                    li
+                        strong Prazo de Execução: 
+                        span= contrato.prazoExecucao
+                    li
+                        strong NIPC da Entidade Comunicante: 
+                        span= contrato.NIPC_entidade_comunicante
+                    li
+                        strong Entidade Comunicante: 
+                        span= contrato.entidade_comunicante
+                    li
+                        strong Fundamentação: 
+                        span= contrato.fundamentacao
+            else
+                p Nenhuma informação encontrada para este contrato.
